@@ -9,9 +9,26 @@ familiar with Python, a different language could be used, e.g., JavaScript).
 code.
 3. In case the behaviors differ, explain why
 
+    hashCode(), HashMap
+
+
+### Behavior of Assignment1.java vs  Assignment1.py vs Assignment1.rs
+
+| java  | python | rust  | why different                                                              |
+|-------|--------|-------|----------------------------------------------------------------------------|
+| true  | true   | N/A   |                                                                            |
+| false | false  | N/A   |                                                                            |
+| false | false  | N/A   |                                                                            |
+| true  | true   | N/A   |                                                                            |
+| false | true   | N/A   | `v.__eq__(u)` falls back to `u.__eq__(v)`. explained in code comment further |
+| false | false  | N/A   |                                                                            |
+| false | false  | N/A   |                                                                            |
+
+
+## Oracle Java Doc of Object `equals()`
+
 https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-
 
-**equals**
 
 `public boolean equals(Object obj)`
 
@@ -33,23 +50,3 @@ Parameters:
 Returns:
     true if this object is the same as the obj argument; false otherwise.
 See Also:
-    hashCode(), HashMap
-
-
-### Behavior of Assignment1.java vs  Assignment1.py vs Assignment1.rs
-
-| java  | python | rust  | why different                                                              |
-|-------|--------|-------|----------------------------------------------------------------------------|
-| true  | true   | N/A   |                                                                            |
-| false | false  | N/A   |                                                                            |
-| false | false  | N/A   |                                                                            |
-| true  | true   | N/A   |                                                                            |
-| false | true   | N/A   | `v.__eq__(u)` falls back to `u.__eq__(v)`. explained in code comment further |
-| false | false  | N/A   |                                                                            |
-| false | false  | N/A   |                                                                            |
-
-
-
-## Links
-
-https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-
