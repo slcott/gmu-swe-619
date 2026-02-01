@@ -7,7 +7,7 @@ VENV_ACTIVATE = $(VENV_DIR)/bin/activate
 PIP = $(VENV_DIR)/bin/pip
 PYTEST = $(VENV_DIR)/bin/pytest
 
-.PHONY: all install test clean
+.PHONY: all install test clean run
 
 all: install test
 
@@ -22,6 +22,10 @@ $(VEND_DIR):
 test:
 	@echo "Running tests..."
 	@$(PYTEST)
+
+run: install
+	@echo "Running Assignment1.py..."
+	@$(PYTHON) Assignment1.py
 
 clean:
 	@echo "Cleaning up..."

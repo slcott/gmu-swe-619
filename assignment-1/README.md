@@ -12,17 +12,17 @@ code.
     hashCode(), HashMap
 
 
-### Behavior of Assignment1.java vs  Assignment1.py vs Assignment1.rs
+### Behavior of Assignment in java, python, rust and swift
 
-| java  | python | rust  | why different                                                              |
-|-------|--------|-------|----------------------------------------------------------------------------|
-| true  | true   | N/A   |                                                                            |
-| false | false  | N/A   |                                                                            |
-| false | false  | N/A   |                                                                            |
-| true  | true   | N/A   |                                                                            |
-| false | true   | N/A   | `v.__eq__(u)` falls back to `u.__eq__(v)`. explained in code comment further |
-| false | false  | N/A   |                                                                            |
-| false | false  | N/A   |                                                                            |
+| Test Case                                                | Java   | Python | Rust   | Swift  | Why Different                                                                                             |
+|----------------------------------------------------------|--------|--------|--------|--------|-----------------------------------------------------------------------------------------------------------|
+| 1. `u.equals(u)` (u is User("Student1"))                 | true   | true   | true   | true   |                                                                                                           |
+| 2. `u.equals(null)` (u is User("Student1"))              | false  | false  | false  | N/A    | Swift: Cannot compare `User` with `nil` directly. Type system prevents this.                              |
+| 3. `u.equals("Student1")` (u is User("Student1"))        | false  | false  | false  | N/A    | Swift: Cannot compare `User` with `String` directly. Type system prevents this.                           |
+| 4. `u.equals(v)` (u is User, v is SpecialUser)           | true   | true   | true   | false  | Swift: Enum cases are distinct types. Default `Equatable` is symmetric.                                   |
+| 5. `v.equals(u)` (v is SpecialUser, u is User)           | false  | true   | false  | false  | Python: `v.__eq__(u)` returns `NotImplemented`, falls back to `u.__eq__(v)`.                              |
+| 6. `v.equals(u)` (u is User("Student1"), v is User(nil)) | false  | false  | false  | false  |                                                                                                           |
+| 7. `u.equals(v)` (u is User("Student1"), v is User(nil)) | false  | false  | false  | false  |                                                                                                           |
 
 
 ## Oracle Java Doc of Object `equals()`
