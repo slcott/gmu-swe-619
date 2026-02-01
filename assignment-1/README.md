@@ -36,10 +36,20 @@ See Also:
     hashCode(), HashMap
 
 
-```
+### Behavior of Assignment1.java vs  Assignment1.py vs Assignment1.rs
+
+| java  | python | rust  | why different                                                              |
+|-------|--------|-------|----------------------------------------------------------------------------|
+| true  | true   | N/A   |                                                                            |
+| false | false  | N/A   |                                                                            |
+| false | false  | N/A   |                                                                            |
+| true  | true   | N/A   |                                                                            |
+| false | true   | N/A   | `v.__eq__(u)` falls back to `u.__eq__(v)`. explained in code comment further |
+| false | false  | N/A   |                                                                            |
+| false | false  | N/A   |                                                                            |
+
 
 
 ## Links
 
-https://docs.orac
->>>>>>> 0d533ba (Initial commit)
+https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-
