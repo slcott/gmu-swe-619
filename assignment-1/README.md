@@ -1,6 +1,6 @@
 
 # Assignment 1
-
+---
 Consider the code in Assignment1.java:
 
 1. Translate the Java code into Python (in case none of the team members is
@@ -10,7 +10,7 @@ code.
 3. In case the behaviors differ, explain why
 
     hashCode(), HashMap
-
+---
 
 ### Behavior of Assignment in java, python, rust and swift
 
@@ -24,7 +24,24 @@ code.
 | 6. `v.equals(u)` (u is User("Student1"), v is User(nil)) | false  | false  | false  | false  |                                                                                                           |
 | 7. `u.equals(v)` (u is User("Student1"), v is User(nil)) | false  | false  | false  | false  |                                                                                                           |
 
+For python case 5, python has interesting behavior.
+This is explained by a model search by the following:
+> When the object on the left is the parent and the object on the right is a subclass, Python actually prioritizes the subclass. It suspects the child might have more specific comparison logic.
+* Python calls special_user.__eq__(user).
+* Inside SpecialUser.__eq__, the code checks isinstance(user, SpecialUser).
+* Result: False (A base User is not a SpecialUser).
+* Action: SpecialUser returns NotImplemented.
+* Fallback: Python now goes back to the left side and calls user.__eq__(special_user).
+* Inside User.__eq__, it checks isinstance(special_user, User).
+* Result: True (A SpecialUser is an instance of User).
+* Final Result: It compares the names and returns True or False.
 
+
+The comparison can be made more strict by using `type()` instead of `instanceof()` which is used for polymorphism. 
+
+Since swift and Rust are categorized as systems programming languages, they use strict typing and case classes which is different than python. 
+
+---
 ## Oracle Java Doc of Object `equals()`
 
 https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-
