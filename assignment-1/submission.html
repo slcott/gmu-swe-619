@@ -1,0 +1,166 @@
+<h1 id="swe619-spring-2026-assignment-1">SWE619, Spring 2026, Assignment
+1</h1>
+<h3 id="group-1">Group 1</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Group members</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scott Riccardelli</td>
+</tr>
+<tr>
+<td>Thomas Robinson</td>
+</tr>
+<tr>
+<td>Quan Nguyen</td>
+</tr>
+</tbody>
+</table>
+<p>Consider the code in Assignment1.java:</p>
+<ol type="1">
+<li><p>Translate the Java code into Python (in case none of the team
+members is familiar with Python, a different language could be used,
+e.g., JavaScript).</p></li>
+<li><p>Verify whether the same behavior will be observed using the
+translated code.</p></li>
+<li><p>In case the behaviors differ, explain why</p>
+<p>hashCode(), HashMap</p></li>
+</ol>
+<h3 id="behavior-of-assignment-in-java-python-rust-and-swift">Behavior
+of Assignment in java, python, rust and swift</h3>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr>
+<th>Test Case</th>
+<th>Java</th>
+<th>Python</th>
+<th>Rust</th>
+<th>Swift</th>
+<th>Why Different</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. <code>u.equals(u)</code> (u is
+<code>User("Student1")</code>)</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>2. <code>u.equals(null)</code> (u is
+<code>User("Student1")</code>)</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>N/A</td>
+<td>Swift: Cannot compare <code>User</code> with <code>nil</code>
+directly. Type system prevents this.</td>
+</tr>
+<tr>
+<td>3. <code>u.equals("Student1")</code> (u is
+<code>User("Student1")</code>)</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>N/A</td>
+<td>Swift: Cannot compare <code>User</code> with <code>String</code>
+directly. Type system prevents this.</td>
+</tr>
+<tr>
+<td>4. <code>u.equals(v)</code> (u is User, v is SpecialUser)</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>Swift: Enum cases are distinct types. Default <code>Equatable</code>
+is symmetric.</td>
+</tr>
+<tr>
+<td>5. <code>v.equals(u)</code> (v is SpecialUser, u is User)</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>Python: <code>v.__eq__(u)</code> returns
+<code>NotImplemented</code>, falls back to
+<code>u.__eq__(v)</code>.</td>
+</tr>
+<tr>
+<td>6. <code>v.equals(u)</code> (u is <code>User("Student1")</code>, v
+is User(nil))</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+</tr>
+<tr>
+<td>7. <code>u.equals(v)</code> (u is <code>User("Student1")</code>, v
+is User(nil))</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>For python case 5, python has an interesting behavior.
+<!--This is explained by a model search by the following:--> &gt; When
+the object on the left is the parent and the object on the right is a
+subclass, Python actually prioritizes the subclass.
+<!--It suspects the child might have more specific comparison logic.--></p>
+<ul>
+<li>Python calls <code>special_user.__eq__(user)</code>.</li>
+<li>Inside <code>SpecialUser.__eq__</code>, the code checks
+<code>isinstance(user, SpecialUser)</code>, which is False because a
+base User is not a SpecialUser.</li>
+<li>SpecialUser returns NotImplemented.</li>
+<li>Fallback: Python now goes back to the left side and calls
+user.__eq__(special_user).</li>
+<li>Inside User.__eq__, it checks isinstance(special_user, User), which
+is True because A SpecialUser is an instance of User.</li>
+<li>It compares the names and returns True or False.</li>
+</ul>
+<p>The comparison can be made more strict by using <code>type()</code>
+instead of <code>instanceof()</code> which is used for polymorphism.</p>
+<p>Since swift and Rust are categorized as systems programming
+languages, they use strict typing and case classes which is different
+than python.</p>
+<hr />
+<h2 id="oracle-java-doc-of-object-equals">Oracle Java Doc of Object
+<code>equals()</code></h2>
+<p>https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object</p>
+<pre><code>public boolean equals(Object obj)
+
+Indicates whether some other object is &quot;equal to&quot; this one.
+
+The equals method implements an equivalence relation on non-null object references:
+* It is reflexive: for any non-null reference value x, x.equals(x) should return true.
+* It is symmetric: for any non-null reference values x and y, x.equals(y) should return true if and only if y.equals(x) returns true.
+* It is transitive: for any non-null reference values x, y, and z, if x.equals(y) returns true and y.equals(z) returns true, then x.equals(z) should return true.
+* It is consistent: for any non-null reference values x and y, multiple invocations of x.equals(y) consistently return true or consistently return false, provided no information used in equals comparisons on the objects is modified. 
+* For any non-null reference value x, x.equals(null) should return false. 
+
+The equals method for class Object implements the most discriminating possible equivalence relation on objects; that is, for any non-null reference values x and y, this method returns true if and only if x and y refer to the same object (x == y has the value true).
+
+Note that it is generally necessary to override the hashCode method whenever this method is overridden, so as to maintain the general contract for the hashCode method, which states that equal objects must have equal hash codes.
+
+Parameters:
+    obj - the reference object with which to compare.
+Returns:
+    true if this object is the same as the obj argument; false otherwise.</code></pre>
