@@ -1,7 +1,7 @@
 # SWE619, Spring 2026, Assignment 2
 ## Due Sunday, February 15, 2026 at 11:59PM
 
-### Group 1
+### TeamSp26 1
 |**Group members**|
 |---|
 | Scott Riccardelli |
