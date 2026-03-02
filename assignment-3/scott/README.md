@@ -168,7 +168,7 @@ def get_some_data(key):
 ```
 
 ```java
-void get_some_data(String key) throws OrderProcessingException {
+void get_some_data(String key) throws ServiceUnavailableError {
     try {
         // Lower-level abstraction
         data = sql_client.get_row(key);
