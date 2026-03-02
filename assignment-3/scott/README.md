@@ -6,7 +6,8 @@
 
 - In case none of the team members is familiar with Python, a different language could be used, e.g., JavaScript, Rust or C#
 
-> Scott
+
+
 
 ## Java Exception Hierarchy
 
@@ -145,16 +146,13 @@ BaseException
            └── UserWarning
 ```
 
-Python has a try except else finally block. 
-Java has a try catch finally block.
+
 
 All python exceptions are unchecked.
 Java has checked and unchecked exceptions.
 This is similar to the original python design philosophy which lacks static code analysis.
 
-In python, there are exceptions to use for control flow whereas in java no such exceptions exist and using generic or user defined exceptions to achieve this is is discouraged.
-For example, python ships with a `StopIteration` exception which is raised when a generator is exhausted.
-In java, there is not any kind of similar exception.
+
 
 Similar to java, python has exception chaining. 
 ```python
