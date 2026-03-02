@@ -1,3 +1,5 @@
+package com.scott;
+
 public class Assignment3 {
 
     public static void secondFunc() throws Exception {

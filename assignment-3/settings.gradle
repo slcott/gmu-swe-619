@@ -1,0 +1,3 @@
+rootProject.name = 'assignment-3'
+include 'thomas:java'
+include 'scott:java'
