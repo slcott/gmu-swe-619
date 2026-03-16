@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id "me.champeau.jmh" version "0.7.2"
 }
 
 repositories {
@@ -9,6 +10,19 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    jmh 'org.openjdk.jmh:jmh-core:1.37'
+    jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.37'
+}
+
+jmh {
+    warmupIterations = 1
+    iterations = 1
+    fork = 1
+    timeUnit = 'ms'
+    benchmarkMode = ['avgt']
+    warmup = '1s'
+    timeOnIteration = '1s'
 }
 
 java {
@@ -21,7 +35,7 @@ task runQueue(type: JavaExec) {
     group = 'Execution'
     description = 'Run the Queue class'
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'Queue'
+    mainClass = 'edu.gmu.swe619.queue.Queue'
     args = ['item1', 'item2', 'item3']
 }
 
@@ -29,7 +43,15 @@ task runImmutableQueue(type: JavaExec) {
     group = 'Execution'
     description = 'Run the ImmutableQueue class'
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'ImmutableQueue'
+    mainClass = 'edu.gmu.swe619.queue.ImmutableQueue'
+    args = ['item1', 'item2', 'item3']
+}
+
+task runTwoStackImmutableQueue(type: JavaExec) {
+    group = 'Execution'
+    description = 'Run the TwoStackImmutableQueue class'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'edu.gmu.swe619.queue.TwoStackImmutableQueue'
     args = ['item1', 'item2', 'item3']
 }
 
