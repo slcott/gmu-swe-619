@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+task runQueue(type: JavaExec) {
+    group = 'Execution'
+    description = 'Run the Queue class'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'Queue'
+    args = ['item1', 'item2', 'item3']
+}
+
+task runImmutableQueue(type: JavaExec) {
+    group = 'Execution'
+    description = 'Run the ImmutableQueue class'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'ImmutableQueue'
+    args = ['item1', 'item2', 'item3']
+}
+
+test {
+    useJUnitPlatform()
+}
